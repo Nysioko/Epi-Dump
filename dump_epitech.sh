@@ -17,7 +17,15 @@ if grep -q "debian" /etc/os-release | grep -q "ubuntu" /etc/os-release; then
 else
     echo "You are not using Debian, the script will stop. Please use Debian and run the script again"
 fi
-echo "Script will now install the dependencies; this may take a while, please be patient..."
+
+echo "Adding PPAs"
+
+
+
+echo "The script will now install the dependencies; this may take a while, please be patient..."
+
+echo "Changing directory to /tmp and downloading the dependencies"
+cd /tmp
 
 ## Update the system
 apt-get update
@@ -95,6 +103,12 @@ apt-get install -y libpq5
 echo "done."
 
 apt-get install -y lncurses-dev
+echo "done."
+
+apt-get install -y libncurses5-dev
+echo "done."
+
+apt-get install -y libncursesw5-dev
 echo "done."
 
 apt-get install -y ghc
