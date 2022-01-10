@@ -1,11 +1,34 @@
-# epitech-script-dump-debian
-Unofficial script regrouping tools necessary for your schooling at Epitech (Usable from the first year)
-This script is not official and is not maintained by Epitech.
-For the moment, this script is not stable and can be used for educational purposes only.
-If you want to use this script, use it at your own risk.
-So, if you encounter any problem, please report in Issues section.
 
-Here is the list of tested systems:
-- Ubuntu 21.10
-- Ubuntu 21.04
-- Ubuntu 20.04
+# {Epitech Script Dump Debian.}
+
+Unofficial script regrouping tools necessary for your schooling at Epitech (Usable from the first year)
+
+
+## Authors
+
+- [@Nysioko](https://github.com/Nysioko)
+
+
+## FAQ
+
+#### Support for RedHat / Fedora systems?
+
+Not for this script. Maybe for another one?
+
+#### Will this script be kept up to date?
+
+As long as I am in school, the script will be maintained. At the end of my schooling, the project will be archived and discontinued.
+
+
+## Running Tests
+
+To run the script, run the following command
+
+```bash
+  sudo ./dump_epitech
+```
+If your terminal tells you the message: permission denied: ./cc.sh ; Use this comand:
+
+```bash
+    chmod +x dump_epitech
+```

@@ -18,9 +18,11 @@ else
     echo "You are not using Debian, the script will stop. Please use Debian and run the script again"
 fi
 
+echo "Yeah, you are ready to go, let's start the script"
+
+read -p "Please enter your {Epitech.} login: " login
+
 echo "Adding PPAs"
-
-
 
 echo "The script will now install the dependencies; this may take a while, please be patient..."
 
@@ -113,3 +115,15 @@ echo "done."
 
 apt-get install -y ghc
 echo "done."
+
+if read -t 5 -p "Do you want generate a SSH key for GitHub? (y/n) " answer; then
+    if [ "$answer" = "y" ]; then
+        echo "Generating SSH key for GitHub..."
+        ssh-keygen -t rsa -b 4096 -C $login
+        echo "done."
+    else
+        echo "Ok, we won't generate a SSH key for GitHub"
+    fi
+else
+    echo "You chose not to install the requirements"
+fi
