@@ -1,7 +1,8 @@
+#!/usr/bin/python3
+
 import sys
 import os
 import urllib.request
-import contextlib
 
 def check_sudo():
     if os.geteuid() != 0:
