@@ -5,12 +5,23 @@ import os
 import urllib.request
 import urllib.parse
 
-def check_sudo():
+def init_script():
     if os.geteuid() != 0:
         print("You need to be root to run this script.")
         sys.exit(1)
     else:
-        os.system('clear')
+        if os.system('command -v git > /dev/null 2>&1') != 0:
+            print('\033[1;31m[!] Git is not installed.\033[0m')
+            print('\033[1;31m[!] Please install git to continue.\033[0m')
+            sys.exit(1)
+        else:
+            if os.path.isfile('.version') == False:
+                print('\033[1;31m[!] No version file detected.\033[0m')
+                print('\033[1;31m[!] Please verify that you are in the right directory or the repository is correctly cloned.\033[0m')
+                sys.exit(1)
+            else:
+                version = open('.version').read()
+                return version
 
 def splash(version):
     print("")
@@ -50,71 +61,69 @@ def is_latest_version(version):
 
     if online_version == version:
         print('\033[1;32m[+] You are using the latest version of the script.\033[0m\n')
+        os.system('rm /tmp/.version')
     else:
-        if(version > online_version):
+        if (version > online_version):
             print('\033[1;31m[!] This version is too highest in comparison to the online version.\033[0m')
             print('\033[1;33m[!] Pulling the latest version...\033[0m\n')
-            #restart_script()
-        elif(version.isnumeric() == False):
-            print('\033[1;31m[!] This version is not a number.\033[0m')
-            print('\033[1;33m[!] Pulling the latest version...\033[0m\n')
+            os.system('rm /tmp/.version')
             #restart_script()
         else:
             print('\033[1;31m[!] You are not using the latest version of the script.\033[0m')
             print('\033[1;31m[!] Actual version: \033[1;32m' + version + '\033[0m')
             print('\033[1;31m[!] Latest version: \033[1;32m' + open("/tmp/.version").read() + '\033[0m')
             print('\033[1;33m[!] Pulling the latest version...\033[0m\n')
+            os.system('rm /tmp/.version')
             #restart_script()
 
 def detect_package_manager():
     print('Detecting package manager...')
     print('Package manager detected: ', end='')
+    package_manager = 'unknown'
     if os.system('command -v apt > /dev/null 2>&1') == 0:
         print('\033[1;32mapt\033[0m\n')
-        return 'apt'
+        package_manager = 'apt'
+        return package_manager
     elif os.system('command -v yum > /dev/null 2>&1') == 0:
         print('\033[1;32myum\033[0m\n')
-        return 'yum'
+        package_manager = 'yum'
+        return package_manager
     elif os.system('command -v dnf > /dev/null 2>&1') == 0:
         print('\033[1;32mdnf\033[0m\n')
-        return 'dnf'
+        package_manager = 'dnf'
+        return package_manager
     elif os.system('command -v pacman > /dev/null 2>&1') == 0:
         print('\033[1;32mpacman\033[0m\n')
-        return 'pacman'
+        package_manager = 'pacman'
+        return package_manager
     else:
         print('\033[1;31mUnknown\033[0m')
-        return 'unknown'
+        return package_manager
 
-def check_dependencies():
+def check_dependencies(package_manager):
+    dependancies = ['wget', 'curl', 'gcc', 'g++']
     print('Checking dependencies...')
-    if detect_package_manager() == 'apt':
-        os.system('apt-get update > /dev/null 2>&1')
-        os.system('apt-get install -y wget > /dev/null 2>&1')
-    elif detect_package_manager() == 'yum':
-        os.system('yum update > /dev/null 2>&1')
-        os.system('yum install -y wget > /dev/null 2>&1')
-    elif detect_package_manager() == 'pacman':
-        os.system('pacman -Sy > /dev/null 2>&1')
-        os.system('pacman -S wget > /dev/null 2>&1')
-    else:
-        print('Unknown package manager or no package manager compatible with this script.')
-        sys.exit(1)
+
+    for i in dependancies:
+        #os.system(package_manager + '-y' + i + ' > /dev/null 2>&1')
+        if os.system('command -v ' + i + ' > /dev/null 2>&1') == 0:
+            print('\033[1;32m' + i + '\033[0m', end='')
+            if i != dependancies[-1]:
+                print('\033[1;32m, \033[0m', end='')
+        else:
+            print('\033[1;31m' + i + '\033[0m')
+            print('\033[1;31m[!] Please install ' + i + ' to continue\033[0m')
+            sys.exit(1)
+    print('\n')
 
 def main():
-    if os.path.isfile('.version') == False:
-        print('\033[1;31m[!] No version file detected.\033[0m')
-        print('\033[1;31m[!] Please verify that you are in the right directory or the repository is correctly cloned.\033[0m')
-        sys.exit(1)
-    else:
-        version = open('.version').read()
-    check_sudo()
-    splash(version)
-    is_latest_version(version)
+    os.system('clear')
+    splash(init_script())
+    is_latest_version(init_script())
     if check_internet() == False:
         print('\033[1;31m[!] No internet connection detected.\033[0m')
         sys.exit(1)
-    detect_package_manager()
-    #check_dependencies()
+    check_dependencies(detect_package_manager())
 
 if __name__ == '__main__':
     main()
