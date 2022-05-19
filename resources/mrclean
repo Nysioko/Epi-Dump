@@ -1,0 +1,25 @@
+clear
+echo "###################################################";
+echo "####### Suppresion des fichiers temporaires #######";
+find -name "*~" > mrclean_593fc8290.tmp;
+find -name "#*#" >> mrclean_593fc8290.tmp;
+find -name "*.o" >> mrclean_593fc8290.tmp;
+find -name "vgcore.*" >> mrclean_593fc8290.tmp;
+find -name "libmy.a" >> mrclean_593fc8290.tmp;
+find -name "a.out" >> mrclean_593fc8290.tmp;
+find -name "*.hi" >> mrclean_593fc8290.tmp;
+find -name "*.a" >> mrclean_593fc8290.tmp;
+find -name "*.so" >> mrclean_593fc8290.tmp;
+find -name "*~" -delete;
+find -name "#*#" -delete;
+find -name "*.o" -delete;
+find -name "*.hi" -delete;
+find -name "*.a" -delete;
+find -name "*.so" -delete;
+find -name "vgcore.*" -delete;
+find -name "libmy.a" -delete;
+find -name "a.out" -delete;
+echo "###################################################";
+cat mrclean_593fc8290.tmp;
+rm mrclean_593fc8290.tmp;
+echo "###################################################";
