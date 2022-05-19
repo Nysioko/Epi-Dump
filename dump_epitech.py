@@ -11,32 +11,18 @@ def check_sudo():
         os.system('clear')
 
 def splash(version):
-<<<<<<< HEAD
-    print ("")
-    print ("\033[1;34m   ____       _       ___                   \033[0m")
-    print ("\033[1;34m  / __/___   (_)____ / _ \ __  __ __ _   ___ \033[0m")
-    print ("\033[1;34m / _/ / _ \ / //___// // // /_/ //    \ / _ \ \033[0m")
-    print ("\033[1;34m/___// .__//_/     /____/ \____//_/_/_// .__/\033[0m")
-    print ("\033[1;34m    /_/                               /_/    \033[0m\n\n")
-    print (" \033[1;32m+ -- -- +=[ Script by: Nysioko\033[1;m")
-    print (" \033[1;32m+ -- -- +=[ Version: " + version +"\033[1;m")
-    print (" \033[1;32m+ -- -- +=[ Last update: 19 May 2022\033[1;m")
-    print (" \033[1;32m+ -- -- +=[ This script is under the Unlicense\033[1;m\n\n")
-    print ("\033[1;91m[W] This script is under development, please report any bug to @Nysioko\033[0m")
-    print ("\033[1;91m[W] This script modify your environment, please be careful with it\033[0m\n")
-=======
     print("")
     print("\033[1;34m   ____       _       ___                   \033[0m")
-    print("\033[1;34m  / __/___  (_)____ / _ \ __  __ __ _   ___ \033[0m")
+    print("\033[1;34m  / __/___   (_)____ / _ \ __  __ __ _   ___ \033[0m")
     print("\033[1;34m / _/ / _ \ / //___// // // /_/ //    \ / _ \ \033[0m")
     print("\033[1;34m/___// .__//_/     /____/ \____//_/_/_// .__/\033[0m")
     print("\033[1;34m    /_/                               /_/    \033[0m\n\n")
-    print(" \033[1;32m+ -- -- +=[ Script by: Nysioko\033[1;m")
-    print(" \033[1;32m+ -- -- +=[ Version: " + version +"\033[1;m")
-    print(" \033[1;32m+ -- -- +=[ Last update: 19 May 2022\033[1;m\n\n")
+    print("\033[1;32m+ -- -- +=[ Script by: Nysioko\033[1;m")
+    print("\033[1;32m+ -- -- +=[ Version: " + version +"\033[1;m")
+    print("\033[1;32m+ -- -- +=[ Last update: 19 May 2022\033[1;m")
+    print("\033[1;32m+ -- -- +=[ This script is under the Unlicense\033[1;m\n\n")
     print("\033[1;91m[W] This script is under development, please report any bug to @Nysioko\033[0m")
     print("\033[1;91m[W] This script modify your environment, please be careful with it\033[0m\n")
->>>>>>> refs/remotes/origin/main
     os.system('sleep 1')
 
 def check_internet():
