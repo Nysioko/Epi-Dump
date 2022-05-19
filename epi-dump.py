@@ -3,6 +3,7 @@
 import sys
 import os
 import urllib.request
+import urllib.parse
 
 def check_sudo():
     if os.geteuid() != 0:
@@ -33,25 +34,37 @@ def check_internet():
     except:
         return False
 
+def restart_script():
+    print('Restarting script...\n')
+    os.system('sleep 1')
+    os.system('sudo python3 ./epi-dump.py')
+
 def is_latest_version(version):
     print('Checking script version...')
     os.system("wget -O /tmp/.version https://raw.githubusercontent.com/Nysioko/EpiDump/main/.version > /dev/null 2>&1")
+    if os.path.isfile('/tmp/.version') == False:
+        print('\033[1;31m[!] Impossible to check version, please try again later\033[0m')
+        print('\033[1;31m[!] If the problem persist, please report it to @Nysioko\033[0m')
+        sys.exit(1)
     online_version = open("/tmp/.version").read()
+
     if online_version == version:
         print('\033[1;32m[+] You are using the latest version of the script.\033[0m\n')
     else:
         if(version > online_version):
             print('\033[1;31m[!] This version is too highest in comparison to the online version.\033[0m')
             print('\033[1;33m[!] Pulling the latest version...\033[0m\n')
+            #restart_script()
         elif(version.isnumeric() == False):
             print('\033[1;31m[!] This version is not a number.\033[0m')
             print('\033[1;33m[!] Pulling the latest version...\033[0m\n')
+            #restart_script()
         else:
             print('\033[1;31m[!] You are not using the latest version of the script.\033[0m')
             print('\033[1;31m[!] Actual version: \033[1;32m' + version + '\033[0m')
             print('\033[1;31m[!] Latest version: \033[1;32m' + open("/tmp/.version").read() + '\033[0m')
             print('\033[1;33m[!] Pulling the latest version...\033[0m\n')
-
+            #restart_script()
 
 def detect_package_manager():
     print('Detecting package manager...')

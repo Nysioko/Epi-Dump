@@ -1,15 +1,16 @@
+#!/bin/bash
 clear
 echo "###################################################";
-echo "####### Suppresion des fichiers temporaires #######";
-find -name "*~" > mrclean_593fc8290.tmp;
-find -name "#*#" >> mrclean_593fc8290.tmp;
-find -name "*.o" >> mrclean_593fc8290.tmp;
-find -name "vgcore.*" >> mrclean_593fc8290.tmp;
-find -name "libmy.a" >> mrclean_593fc8290.tmp;
-find -name "a.out" >> mrclean_593fc8290.tmp;
-find -name "*.hi" >> mrclean_593fc8290.tmp;
-find -name "*.a" >> mrclean_593fc8290.tmp;
-find -name "*.so" >> mrclean_593fc8290.tmp;
+echo "############ Deleting temporary files #############";
+find -name "*~" > mrclean_tmp.tmp;
+find -name "#*#" >> mrclean_tmp.tmp;
+find -name "*.o" >> mrclean_tmp.tmp;
+find -name "vgcore.*" >> mrclean_tmp.tmp;
+find -name "libmy.a" >> mrclean_tmp.tmp;
+find -name "a.out" >> mrclean_tmp.tmp;
+find -name "*.hi" >> mrclean_tmp.tmp;
+find -name "*.a" >> mrclean_tmp.tmp;
+find -name "*.so" >> mrclean_tmp.tmp;
 find -name "*~" -delete;
 find -name "#*#" -delete;
 find -name "*.o" -delete;
@@ -20,6 +21,8 @@ find -name "vgcore.*" -delete;
 find -name "libmy.a" -delete;
 find -name "a.out" -delete;
 echo "###################################################";
-cat mrclean_593fc8290.tmp;
-rm mrclean_593fc8290.tmp;
+cat mrclean_tmp.tmp;
+rm mrclean_tmp.tmp;
 echo "###################################################";
+echo ""
+echo -e "\e[32mDone\e[0m"

@@ -1,7 +1,8 @@
 
-# {Epitech Script Dump Debian.}
+# Epi-Dump
 
 Unofficial script regrouping tools necessary for your schooling at Epitech (Usable from the first year)
+Actually, this script is in development, and actually not usable yet.
 
 
 ## Authors
@@ -19,16 +20,15 @@ Not for this script. Maybe for another one?
 
 As long as I am in school, the script will be maintained. At the end of my schooling, the project will be archived and discontinued.
 
-
 ## Running Tests
 
 To run the script, run the following command
 
 ```bash
-  sudo ./dump_epitech
+  sudo ./epi-dump.py
 ```
 If your terminal tells you the message: permission denied: ./cc.sh ; Use this comand:
 
 ```bash
-    chmod +x dump_epitech
+    chmod +x epi-dump.py
 ```
