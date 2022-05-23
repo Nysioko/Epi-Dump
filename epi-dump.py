@@ -24,7 +24,6 @@ def init_script():
                 version = open('.version').read()
                 return version
 
-
 def splash(version):
     print("")
     print("\033[1;34m   ____       _       ___                   \033[0m")
@@ -39,7 +38,6 @@ def splash(version):
     print("\033[1;91m[W] This script is under development, please report any bug to @Nysioko\033[0m")
     print("\033[1;91m[W] This script modify your environment, please be careful with it\033[0m\n")
 
-
 def check_internet():
     try:
         urllib.request.urlopen('http://www.google.com')
@@ -47,12 +45,10 @@ def check_internet():
     except:
         return False
 
-
 def restart_script():
     print('Restarting script...\n')
     os.system('sleep 1')
     os.system('sudo python3 ./epi-dump.py')
-
 
 def help_func(version):
     print('\n\033[1;32m[*] Usage:\033[0m')
@@ -69,7 +65,6 @@ def help_func(version):
     os.system("clear")
     splash(version)
     menu(version)
-
 
 def is_latest_version(version):
     print('Checking script version...')
@@ -104,7 +99,6 @@ def is_latest_version(version):
             os.system('rm /tmp/.version')
             # restart_script()
 
-
 def detect_package_manager():
     print('\nDetecting package manager...')
     print('Package manager detected: ', end='')
@@ -129,7 +123,6 @@ def detect_package_manager():
         print('\033[1;31mUnknown\033[0m')
         return package_manager
 
-
 def ask_install_missing_package(package_manager, i):
     print('\033[1;33m[!] Do you want to install them now? (y/n)\033[0m')
     answer = input('\033[1;33m[?] Answer: \033[0m')
@@ -153,7 +146,6 @@ def ask_install_missing_package(package_manager, i):
         print('\n\033[1;31m[!] Please answer with y or n.\033[0m\n')
         ask_install_missing_package(package_manager, i)
 
-
 def check_dependencies(package_manager):
     dependancies = ['wget', 'curl', 'gcc', 'g++', 'cmatrix']
     print('Checking dependencies...')
@@ -170,7 +162,6 @@ def check_dependencies(package_manager):
             print('\033[1;33m[!] You need to install "' +
                   i + '" to continue.\033[0m')
             ask_install_missing_package(package_manager, i)
-
 
 def about(version):
     print("\n\033[1;32m+ -- -- +=[ Script by: Nysioko\033[1;m")
@@ -224,7 +215,6 @@ def menu(version):
         splash(version)
         menu(version)
 
-
 def main():
     os.system('clear')
     check_internet()
@@ -240,7 +230,6 @@ def main():
     except KeyboardInterrupt:
         print('\n\033[1;32m[+] Ctrl + C pressed, Bye!\033[0m')
         sys.exit(0)
-
 
 if __name__ == '__main__':
     main()
