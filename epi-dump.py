@@ -178,6 +178,27 @@ def check_dependencies(package_manager):
             ask_install_missing_package(package_manager, i)
 
 
+def install_packages():
+    package_manager = detect_package_manager()
+    dep = ["grub-customizer", "gnome-tweaks", "python3-pip", "libssl-dev",
+    "build-essential", "cmake", "git", "libx11-dev", "freeglut3-dev",
+    "libxcb-image0-dev", "libudev-dev", "libjpeg8-dev", "libopenal-dev",
+    "libsndfile1-dev", "libfreetype6-dev", "libxrandr-dev"]
+    print('\nInstalling packages...')
+
+    for i in dep:
+        os.system("sudo " + package_manager + " install -y" + i + " > /dev/null 2>&1")
+        if os.system('command -v ' + i + ' > /dev/null 2>&1') == 0:
+            print('\033[1;32m' + i + '\033[0m', end='')
+            if i != dep[-1]:
+                print('\033[1;32m, \033[0m', end='')
+            if i == dep[-1]:
+                print('\n')
+        else:
+            print('\033[1;31m' + i + '\033[0m\n')
+            print("Please install the missing dependancies and restart the script.")
+            break
+
 def chain(version):
     os.system("clear")
     splash(version)
@@ -216,11 +237,11 @@ def install(version):
 
 
 def menu(version):
-    print('\033[1;32m[+] Select an option: \033[0m')
+    print('\033[1;32m[~] Select an option: \033[0m')
     print('\033[1;32m[1] Install\033[0m')
     print('\033[1;32m[2] Help\033[0m')
-    print('\033[1;32m[4] About\033[0m')
-    print('\033[1;32m[5] Exit\033[0m\n')
+    print('\033[1;32m[3] About\033[0m')
+    print('\033[1;32m[4] Exit\033[0m\n')
 
     option = input('\033[1;34mEpi-Dump ➜ \033[0m')
     if option == '1' or option == 'install' or option == 'Install' \
@@ -229,9 +250,9 @@ def menu(version):
     elif option == '2' or option == 'help' or option == 'Help' or \
             option == 'HELP' or option == 'h' or option == 'H':
         help_func(version)
-    elif option == '4' or option == 'about' or option == 'About' or option == 'ABOUT':
+    elif option == '3' or option == 'about' or option == 'About' or option == 'ABOUT':
         about(version)
-    elif option == '5' or option == 'exit' or option == 'quit' or option == 'q' \
+    elif option == '4' or option == 'exit' or option == 'quit' or option == 'q' \
             or option == 'Q' or option == 'Exit' or option == 'Quit' or option == 'EXIT' \
             or option == 'QUIT':
         print('\033[1;32m[+] Bye!\033[0m')
@@ -260,20 +281,21 @@ def ask_sudo(version):
 
 
 def main():
-    os.system('clear')
-    check_internet()
-    splash(init_script())
-    os.system('sleep 1')
-    is_latest_version(init_script())
-    if check_internet() == False:
-        print('\033[1;31m[!] No internet connection detected.\033[0m')
-        sys.exit(1)
-    try:
-        while True:
-            ask_sudo(init_script())
-    except KeyboardInterrupt:
-        print('\n\033[1;32m[+] Ctrl + C pressed, Bye!\033[0m')
-        sys.exit(0)
+    # os.system('clear')
+    # check_internet()
+    # splash(init_script())
+    # os.system('sleep 1')
+    # is_latest_version(init_script())
+    # if check_internet() == False:
+    #     print('\033[1;31m[!] No internet connection detected.\033[0m')
+    #     sys.exit(1)
+    # try:
+    #     while True:
+    #         ask_sudo(init_script())
+    # except KeyboardInterrupt:
+    #     print('\n\033[1;32m[+] Ctrl + C pressed, Bye!\033[0m')
+    #     sys.exit(0)
+    install_packages()
 
 
 if __name__ == '__main__':
